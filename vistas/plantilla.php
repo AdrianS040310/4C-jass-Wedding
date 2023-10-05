@@ -397,7 +397,8 @@ session_start();
             $_GET["pagina"] == "error" ||
             $_GET["pagina"] == "blog" ||
             $_GET["pagina"] == "blog-single" ||
-            $_GET["pagina"] == "contact"
+            $_GET["pagina"] == "contact" ||
+            $_GET["pagina"] == "edit"
         ) {
             include "paginas/" . $_GET["pagina"] . ".php";
         } else {

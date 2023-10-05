@@ -31,7 +31,7 @@
 </section>
 <!--=========== Breadcumd Section End ========= -->
 
-<!--=========== Error Section Here ========= -->
+<!--=========== Login Section Here ========= -->
 <section class="error__section pt-120 pb-120">
     <div class="container">
         <div class="row justify-content-center">
@@ -81,4 +81,4 @@
         </div>
     </div>
 </section>
-<!--=========== Error Section End ========= -->
+<!--=========== Login Section End ========= -->

@@ -73,8 +73,8 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                                     <td> <?php echo $value["f"] ?> </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href='index.php?pagina=editar&id=' <?php echo $value["id"]; ?>>
-                                            <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
+                                            <a href='index.php?pagina=edit&id=' <?php echo $value["id"]; ?>>
+                                                <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
                                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </td>

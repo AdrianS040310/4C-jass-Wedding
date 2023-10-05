@@ -7,20 +7,17 @@ class ControladorFormularios
     static public function ctrRegistro()
     {
         if (isset($_POST["registroNombre"])) {
-           
-            
-                $tabla = "registeredusers";
-                $datos = array(
-                    "nombre" => $_POST["registroNombre"],
-                    "email" => $_POST["registroEmail"],
-                    "password" => $_POST["registroPassword"]
-                );
+            $tabla = "registeredusers";
+            $datos = array(
+                "nombre" => $_POST["registroNombre"],
+                "email" => $_POST["registroEmail"],
+                "password" => $_POST["registroPassword"]
+            );
 
-                $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
-                return $respuesta;
-            }
+            $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
+            return $respuesta;
         }
-    
+    }
 
     # seleccionar registros de la tabla
 
