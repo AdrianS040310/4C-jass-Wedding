@@ -30,6 +30,8 @@ session_start();
     <link rel="stylesheet" href="html/assets/css/swiper-bundle.min.css">
     <!--main css-->
     <link rel="stylesheet" href="html/assets/css/main.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         .wow {
             color: #fff;
@@ -55,6 +57,77 @@ session_start();
                 <ul class="main-menu">
 
                     <?php if (isset($_GET["pagina"])) : ?>
+
+                        <?php if ($_GET["pagina"] == "gallery") : ?>
+
+                            <li>
+                                <a class="active" href="#">Options <i class="fas fa-chevron-down"></i></a>
+                                <ul class="sub-menu">
+                                    <li class="subtwohober">
+                                        <a class="active" href="index.php?pagina=signIn">
+                                            <span>Sign In</span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a class="active" href="index.php?pagina=login">
+                                            <span>Login</span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a class="active" href="index.php?pagina=viewLogs">
+                                            <span>View Logs</span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a class="active" href="index.php?pagina=exit">
+                                            <span class="exit-link">Exit<i class="fas fa-sign-out-alt"></i></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <a href="#">Options <i class="fas fa-chevron-down"></i></a>
+                                <ul class="sub-menu">
+                                    <li class="subtwohober">
+                                        <a href="index.php?pagina=signIn">
+                                            <span>
+                                                <i class="fas fa-user-plus"></i>
+                                                <span class="mx-2">Sign In</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a href="index.php?pagina=login">
+                                            <span>
+                                                <i class="fa-solid fa-right-to-bracket"></i>
+                                                <span class="mx-2">Login</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a href="index.php?pagina=viewLogs">
+                                            <span>
+                                                <i class="fa-solid fa-users"></i>
+                                                <span class="mx-2">
+                                                    View Logs
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="subtwohober">
+                                        <a href="index.php?pagina=exit">
+                                            <span class="exit-link">
+                                                <i class="fa-solid fa-right-from-bracket" style="color: #ea1a1a;"></i>
+                                                <span class="mx-2">
+                                                    Exit
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php endif ?>
 
                         <?php if ($_GET["pagina"] == "home") : ?>
                             <li class="nav-item">
@@ -285,6 +358,10 @@ session_start();
     <?php
     if (isset($_GET["pagina"])) {
         if (
+            $_GET["pagina"] == "signIn" ||
+            $_GET["pagina"] == "viewLogs" ||
+            $_GET["pagina"] == "login" ||
+            $_GET["pagina"] == "exit" ||
             $_GET["pagina"] == "home" ||
             $_GET["pagina"] == "about" ||
             $_GET["pagina"] == "service" ||
@@ -302,7 +379,7 @@ session_start();
             include "paginas/error.php";
         }
     } else {
-        #include "paginas/registro.php";
+        include "paginas/registrate.php";
     }
     ?>
 

@@ -31,6 +31,23 @@
 </section>
 <!--=========== Breadcumd Section End ========= -->
 
+<?php
+
+if (!isset($_SESSION["validarIngreso"])) {
+    if ($_SESSION["validarIngreso"] != "ok") {
+        echo '<script> window.location = "index.php?pagina=login";</script>';
+        return;
+    } else {
+        echo '<script> windows.location = "index.php?pagina=home";</script>';
+        return;
+    }
+}
+
+$usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
+
+
+?>
+
 <!--=========== Wedding Party Here ========= -->
 <section class="wedding__party pt-120 pb-120">
     <div class="container">

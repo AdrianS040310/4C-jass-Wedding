@@ -31,6 +31,23 @@
 </section>
 <!--=========== Breadcumd Section Here ========= -->
 
+<?php
+
+if (!isset($_SESSION["validarIngreso"])) {
+    if ($_SESSION["validarIngreso"] != "ok") {
+        echo '<script> window.location = "index.php?pagina=login";</script>';
+        return;
+    } else {
+        echo '<script> windows.location = "index.php?pagina=home";</script>';
+        return;
+    }
+}
+
+$usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
+
+
+?>
+
 <!--=========== Service Section Here ========= -->
 <section class="service__section pt-120 pb-120">
     <div class="left__shape">

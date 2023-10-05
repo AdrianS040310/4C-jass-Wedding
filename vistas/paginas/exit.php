@@ -6,29 +6,12 @@
 </div>
 <!--==== Scroll-Up Section End ======= -->
 
-<?php
-
-if (!isset($_SESSION["validarIngreso"])) {
-    if ($_SESSION["validarIngreso"] != "ok") {
-        echo '<script> window.location = "index.php?pagina=login";</script>';
-        return;
-    } else {
-        echo '<script> windows.location = "index.php?pagina=home";</script>';
-        return;
-    }
-}
-
-$usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
-
-
-?>
-
 <!--=========== Breadcumd Section Here ========= -->
 <section class="breadcumd__banner">
     <div class="container">
         <div class="breadcumd__wrapper center">
             <h1 class="left__content">
-                error 404
+                Exit
             </h1>
             <ul class="right__content">
                 <li>
@@ -40,7 +23,7 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                     <i class="fa-solid fa-chevron-right"></i>
                 </li>
                 <li>
-                    404
+                    Exit
                 </li>
             </ul>
         </div>
@@ -53,19 +36,22 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
-                <div class="error__thumb">
-                    <img src="html/assets/img/404/404.png" alt="error__image">
+                <div style="display: flex; justify-content: center" class="">
+                    <img style="width: 400px; " src="html/assets/img/celebrate/flower.png" alt="flower__image">
                 </div>
                 <div class="error__content">
                     <h3>
-                        Oops! Page Not Found!
+                        Good bye!!!
                     </h3>
                     <p>
-                        We are really, but the page you requested is missing:( Perhaps searching again can help.
-                    </p>
-                    <a href="index.html" class="cmn--btn mt-3">
-                        back to home
+                        See you later... </p>
+                    <a href="#index.html" class="cmn--btn mt-3">
+                        Home
                     </a>
+                    <?php
+                    session_destroy();
+                    echo '<script> window.location = "index.php?pagina=ingreso";</script>';
+                    ?>
                 </div>
             </div>
         </div>

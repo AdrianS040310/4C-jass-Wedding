@@ -31,6 +31,23 @@
 </section>
 <!--=========== Breadcumd Section Here ========= -->
 
+<?php
+
+if (!isset($_SESSION["validarIngreso"])) {
+    if ($_SESSION["validarIngreso"] != "ok") {
+        echo '<script> window.location = "index.php?pagina=login";</script>';
+        return;
+    } else {
+        echo '<script> windows.location = "index.php?pagina=home";</script>';
+        return;
+    }
+}
+
+$usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
+
+
+?>
+
 <!--=========== Celebrate Section Here ========= -->
 <section class="celebrate__section pb-120 pt-120">
     <div class="flowers__shape">
