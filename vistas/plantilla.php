@@ -286,8 +286,33 @@ session_start();
                         <?php endif ?>
 
                     <?php else : ?>
-                        <li class="active">
-                            <a href="index.php?pagina=index">Home</a>
+                        <li>
+                            <a class="active" href="#">Options <i class="fas fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li class="subtwohober">
+                                    <a href="index.php?pagina=signIn">
+                                        <span>Sign In</span>
+                                    </a>
+                                </li>
+                                <li class="subtwohober">
+                                    <a href="index.php?pagina=login">
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                                <li class="subtwohober">
+                                    <a href="index.php?pagina=viewLogs">
+                                        <span>View Logs</span>
+                                    </a>
+                                </li>
+                                <li class="subtwohober">
+                                    <a href="index.php?pagina=exit">
+                                        <span class="exit-link">Exit<i class="fas fa-sign-out-alt"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="active" href="index.php?pagina=index">Home</a>
                         </li>
                         <li>
                             <a href="index.php?pagina=about">About</a>
@@ -379,7 +404,7 @@ session_start();
             include "paginas/error.php";
         }
     } else {
-        include "paginas/registrate.php";
+        include "paginas/signIn.php";
     }
     ?>
 
