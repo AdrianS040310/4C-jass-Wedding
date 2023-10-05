@@ -68,12 +68,13 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                             ?>
                                 <tr>
                                     <td> <?php echo ($key + 1) ?> </td>
-                                    <td> <?php echo $value["name"] ?> </td>
+                                    <td> <?php echo $value["nombre"] ?> </td>
                                     <td> <?php echo $value["email"] ?> </td>
                                     <td> <?php echo $value["f"] ?> </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href='index.php?pagina=editar&id=' <?php echo $value["id"]; ?>><button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
+                                            <a href='index.php?pagina=editar&id=' <?php echo $value["id"]; ?>>
+                                            <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
                                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </td>

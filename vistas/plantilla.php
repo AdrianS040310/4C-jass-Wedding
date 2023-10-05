@@ -287,7 +287,7 @@ session_start();
 
                     <?php else : ?>
                         <li>
-                            <a class="active" href="#">Options <i class="fas fa-chevron-down"></i></a>
+                            <a href="#">Options <i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
                                 <li class="subtwohober">
                                     <a href="index.php?pagina=signIn">

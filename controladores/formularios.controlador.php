@@ -7,11 +7,8 @@ class ControladorFormularios
     static public function ctrRegistro()
     {
         if (isset($_POST["registroNombre"])) {
-            if (
-                preg_match("/^[a-zA-Z]+$/", $_POST["registroNombre"]) &&
-                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,3})+$/', $_POST["registroEmail"]) &&
-                preg_match('/^[0-9a-zA-Z]+$/', $_POST["registroPassword"])
-            ) {
+           
+            
                 $tabla = "registeredusers";
                 $datos = array(
                     "nombre" => $_POST["registroNombre"],
@@ -21,12 +18,9 @@ class ControladorFormularios
 
                 $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
                 return $respuesta;
-            } else {
-                $respuesta = "error";
-                return $respuesta;
             }
         }
-    }
+    
 
     # seleccionar registros de la tabla
 
