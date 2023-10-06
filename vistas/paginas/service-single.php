@@ -55,7 +55,7 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
             <div class="col-lg-8">
                 <div class="blog__single__items">
                     <div class="single__thumb">
-                        <img src="assets/img/service/single/image.jpg" alt="blog__image">
+                        <img src="html/assets/img/service/single/image.jpg" alt="blog__image">
                     </div>
                     <div class="single__content">
                         <h3>
@@ -69,7 +69,7 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                                 <div class="service__items">
                                     <div class="service__thumb">
                                         <a href="service-single.html">
-                                            <img src="assets/img/service/service5.jpg" alt="service__image">
+                                            <img src="html/assets/img/service/service5.jpg" alt="service__image">
                                         </a>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                                 <div class="service__items">
                                     <div class="service__thumb">
                                         <a href="service-single.html">
-                                            <img src="assets/img/service/service4.jpg" alt="service__image">
+                                            <img src="html/assets/img/service/service4.jpg" alt="service__image">
                                         </a>
                                     </div>
                                 </div>

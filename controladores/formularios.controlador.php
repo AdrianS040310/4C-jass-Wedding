@@ -36,13 +36,11 @@ class ControladorFormularios
             $valor = $_POST["ingresoEmail"];
             $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
 
-            // echo "<pre>";
-            // print_r($respuesta);
-            // "<pre>";
-            if ($respuesta != null) {
+            if (is_array($respuesta)) {
                 if ($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $_POST["ingresoPassword"]) {
                     $_SESSION["validarIngreso"] = "ok";
-                    echo "ingreso exitoso";
+                    echo '<div class="alert alert-success">
+                    <label class="text-dark">ingreso exitoso!!!</label> </div>';
                 } else {
                     echo '<script>
                 if(window.history.replaceState){
@@ -50,7 +48,7 @@ class ControladorFormularios
                 }
                 </script>';
                     echo '<div class="alert alert-danger">Error!!! al ingresar al sistema, email o contraseña
-                no coincide</div>';
+                no coinciden</div>';
                 }
             } else {
                 echo '<script>
@@ -58,9 +56,35 @@ class ControladorFormularios
                     window.history.replaceState(null, null, window.location.href);
                 }
                 </script>';
-                echo '<div class="alert alert-danger">Error!!! al ingresar al sistema, email o contraseña
-                no coincide</div>';
+                echo '<div class="alert alert-danger">
+                <label class="text-dark">Error!!! al ingresar al sistema, email o contraseña
+                no coinciden</label> </div>';
             }
+        }
+    }
+
+    /**
+     * Actualizar registro
+     */
+    public function ctrActualizarRegistro()
+    {
+        if (isset($_POST["actualizarNombre"])) {
+            if ($_POST["actualizarPassword"] != "") {
+                $password = $_POST["actualizarPassword"];
+            } else {
+                $password = $_POST["passwordActual"];
+            }
+            $tabla = "registeredusers";
+
+            $datos = array(
+                "id" => $_POST["idUsuario"],
+                "nombre" => $_POST["actualizarNombre"],
+                "email" => $_POST["actualizarEmail"],
+                "password" => $password
+            );
+
+            $respuesta = ModeloFormularios::mdlActualizarRegistros($tabla, $datos);
+            return $respuesta;
         }
     }
 }

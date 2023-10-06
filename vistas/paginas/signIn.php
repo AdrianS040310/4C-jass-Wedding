@@ -77,8 +77,6 @@
                         </div>
                         <!-- Esto es una plantilla no estatica -->
                         <?php
-                        // $registro = new ControladorFormularios();
-                        //  $registro -> ctrRegistro();
 
                         //  forma en que se instancia la clase statica
                         $registro = ControladorFormularios::ctrRegistro();

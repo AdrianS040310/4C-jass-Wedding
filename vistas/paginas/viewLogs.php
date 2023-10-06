@@ -44,6 +44,9 @@ if (!isset($_SESSION["validarIngreso"])) {
 
 $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
 
+$actualizar = new ControladorFormularios();
+$actualizar -> ctrActualizarRegistro();
+
 ?>
 <!--=========== Error Section Here ========= -->
 <section class="error__section pt-120 pb-120">
