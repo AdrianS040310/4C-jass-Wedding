@@ -11,7 +11,8 @@ class ControladorFormularios
             $datos = array(
                 "nombre" => $_POST["registroNombre"],
                 "email" => $_POST["registroEmail"],
-                "password" => $_POST["registroPassword"]
+                "password" => $_POST["registroPassword"],
+                "id" => $_POST["idUsuario"],
             );
 
             $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
@@ -66,7 +67,7 @@ class ControladorFormularios
     /**
      * Actualizar registro
      */
-    public function ctrActualizarRegistro()
+     static public function ctrActualizarRegistro()
     {
         if (isset($_POST["actualizarNombre"])) {
             if ($_POST["actualizarPassword"] != "") {

@@ -35,9 +35,14 @@ class ModeloFormularios
         } else {
             $stmt = Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(date, '%d/%m/%Y') as f FROM $tabla 
             WHERE $item = :$item ORDER BY id DESC");
-            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
-            $stmt->execute();
-            return $stmt->fetch();
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_INT);
+            
+            if($stmt->execute()){
+                return $stmt->fetch();
+            }else{
+                return print_r(Conexion::conectar()->errorInfo());
+            }
+            
         }
         $stmt = null;
     }

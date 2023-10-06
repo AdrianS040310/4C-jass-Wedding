@@ -76,7 +76,7 @@ $actualizar -> ctrActualizarRegistro();
                                     <td> <?php echo $value["f"] ?> </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href='index.php?pagina=edit&id=' <?php echo $value["id"]; ?>>
+                                            <a href= <?php echo 'index.php?pagina=edit&id='. $value["id"];?>>
                                                 <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
                                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                         </div>
