@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -405,7 +405,7 @@ session_start();
             include "paginas/error.php";
         }
     } else {
-        include "paginas/signIn.php";
+        include "paginas/home.php";
     }
     ?>
 

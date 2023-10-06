@@ -4,7 +4,9 @@ if (isset($_GET["id"])) {
     $valor = $_GET["id"];
 
     $usuario = ControladorFormularios::ctrSeleccionarRegistros($item, $valor);
-    echo "<pre style='color: black'>"; print_r($usuario); echo "</pre>";
+    /*echo "<pre style='color: black'>";
+    print_r($usuario);
+    echo "</pre>";*/
 }
 ?>
 <!--=========== Breadcumd Section Here ========= -->
@@ -31,8 +33,6 @@ if (isset($_GET["id"])) {
     </div>
 </section>
 <!--=========== Breadcumd Section End ========= -->
-
-
 
 <!--=========== Edit Data Section Here ========= -->
 <section class="error__section pt-120 pb-120">
@@ -72,7 +72,7 @@ if (isset($_GET["id"])) {
                 </div>
 
                 <?php
-                
+
                 // $actualizar = ControladorFormularios::ctrActualizarRegistro();
                 // if ($actualizar == "ok") {
                 //     echo '<script>
