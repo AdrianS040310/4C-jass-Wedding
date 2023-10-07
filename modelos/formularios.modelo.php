@@ -36,18 +36,17 @@ class ModeloFormularios
             $stmt = Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(date, '%d/%m/%Y') as f FROM $tabla 
             WHERE $item = :$item ORDER BY id DESC");
             $stmt->bindParam(":" . $item, $valor, PDO::PARAM_INT);
-            
-            if($stmt->execute()){
+
+            if ($stmt->execute()) {
                 return $stmt->fetch();
-            }else{
+            } else {
                 return print_r(Conexion::conectar()->errorInfo());
             }
-            
         }
         $stmt = null;
     }
     /**
-     * Actualizar registros
+     * Actualizar registro
      */
     static public function mdlActualizarRegistros($tabla, $datos)
     {
@@ -58,6 +57,26 @@ class ModeloFormularios
         $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
         $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            print_r(Conexion::conectar()->errorInfo());
+        }
+
+        $stmt = null;
+    }
+
+    /**
+     * Eliminar registro
+     */
+
+    static public function mdlEliminarRegistro($tabla, $valor)
+    {
+        $stmt = Conexion::conectar()->prepare("DELETE from $tabla WHERE id = :id");
+
+        $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
 
 
         if ($stmt->execute()) {

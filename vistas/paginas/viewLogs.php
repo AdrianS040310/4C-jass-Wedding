@@ -1,11 +1,3 @@
-<!--==== Scroll-Up Section Here ======= -->
-<div class="scroll-up">
-    <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-</div>
-<!--==== Scroll-Up Section End ======= -->
-
 <!--=========== Breadcumd Section Here ========= -->
 <section class="breadcumd__banner">
     <div class="container">
@@ -45,10 +37,10 @@ if (!isset($_SESSION["validarIngreso"])) {
 $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
 
 $actualizar = new ControladorFormularios();
-$actualizar -> ctrActualizarRegistro();
+$actualizar->ctrActualizarRegistro();
 
 ?>
-<!--=========== Error Section Here ========= -->
+<!--=========== View Logs Section Here ========= -->
 <section class="error__section pt-120 pb-120">
     <div class="container">
         <div class="row justify-content-center">
@@ -76,10 +68,18 @@ $actualizar -> ctrActualizarRegistro();
                                     <td> <?php echo $value["f"] ?> </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href= <?php echo 'index.php?pagina=edit&id='. $value["id"];?>>
-                                                <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button></a>
-                                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                            <a href=<?php echo 'index.php?pagina=edit&id=' . $value["id"]; ?>>
+                                                <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button>
+                                            </a>
                                         </div>
+                                        <form method="post">
+                                            <input type="hidden" value="<?php echo $value["id"]; ?>" name="eliminarRegistro">
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                            <?php
+                                            $eliminar = new ControladorFormularios();
+                                            $eliminar->ctrEliminarRegistro();
+                                            ?>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -90,4 +90,4 @@ $actualizar -> ctrActualizarRegistro();
         </div>
     </div>
 </section>
-<!--=========== Error Section End ========= -->
+<!--=========== View Logs Section End ========= -->

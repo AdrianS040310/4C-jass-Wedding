@@ -1,11 +1,3 @@
-<!--==== Scroll-Up Section Here ======= -->
-<div class="scroll-up">
-    <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-</div>
-<!--==== Scroll-Up Section End ======= -->
-
 <!--=========== Banner Section Here ========= -->
 <section class="banner__section">
     <div class="banner-overlay">
@@ -248,7 +240,7 @@
                     </div>
                     <div class="testi__content">
                         <h3>
-                        Adrian Santos
+                            Adrian Santos
                         </h3>
                         <p>
                             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.

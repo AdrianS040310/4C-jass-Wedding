@@ -1,11 +1,3 @@
-<!--==== Scroll-Up Section Here ======= -->
-<div class="scroll-up">
-    <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-</div>
-<!--==== Scroll-Up Section End ======= -->
-
 <!--=========== Breadcumd Section Here ========= -->
 <section class="breadcumd__banner">
     <div class="container">
@@ -44,8 +36,6 @@ if (!isset($_SESSION["validarIngreso"])) {
 }
 
 $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
-
-
 ?>
 
 <!--=========== Celebrate Section Here ========= -->
@@ -78,7 +68,7 @@ $usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
                             The wedding day of
                         </h3>
                         <h2 class="celebrate__tittle">
-                            Shakira & Deniel
+                            Shakira & Adrian
                         </h2>
                         <h3 class="sub__tittle">
                             Which is celebration on

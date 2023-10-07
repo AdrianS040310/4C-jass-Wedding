@@ -1,9 +1,10 @@
 <?php
-# registro
 
 class ControladorFormularios
-
 {
+    /**
+     * Registro
+     */
     static public function ctrRegistro()
     {
         if (isset($_POST["registroNombre"])) {
@@ -19,15 +20,19 @@ class ControladorFormularios
         }
     }
 
-    # seleccionar registros de la tabla
-
+    /**
+     * Seleccionar registros de la tabla
+     */
     static public function ctrSeleccionarRegistros($item, $valor)
     {
         $tabla = "registeredusers";
         $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
         return $respuesta;
     }
-    # Ingreso
+
+    /**
+     * Ingreso
+     */
     public function ctrIngreso()
     {
         if (isset($_POST["ingresoEmail"])) {
@@ -40,7 +45,12 @@ class ControladorFormularios
                 if ($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $_POST["ingresoPassword"]) {
                     $_SESSION["validarIngreso"] = "ok";
                     echo '<div class="alert alert-success">
-                    <label class="text-dark">ingreso exitoso!!!</label> </div>';
+                    <label class="text-dark">ingreso exitoso!!!</label> </div>
+                    <script>
+                        setTimeout( function(){
+                                        window.location = "index.php?pagina=home";
+                                    }, 3000);
+                    </script>';
                 } else {
                     echo '<script>
                 if(window.history.replaceState){
@@ -66,7 +76,7 @@ class ControladorFormularios
     /**
      * Actualizar registro
      */
-     static public function ctrActualizarRegistro()
+    static public function ctrActualizarRegistro()
     {
         if (isset($_POST["actualizarNombre"])) {
             if ($_POST["actualizarPassword"] != "") {
@@ -85,6 +95,28 @@ class ControladorFormularios
 
             $respuesta = ModeloFormularios::mdlActualizarRegistros($tabla, $datos);
             return $respuesta;
+        }
+    }
+
+    /**
+     * Eliminar registro
+     */
+    static function ctrEliminarRegistro()
+    {
+        if (isset($_POST["eliminarRegistro"])) {
+            $tabla = "registeredusers";
+            $valor = $_POST["eliminarRegistro"];
+
+            $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+
+            if ($respuesta = "ok") {
+                echo '<script> 
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                } 
+                window.location = "index.php?pagina=viewLogs";
+                </script>';
+            }
         }
     }
 }

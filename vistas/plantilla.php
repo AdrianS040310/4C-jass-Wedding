@@ -65,22 +65,39 @@ session_start();
                                 <ul class="sub-menu">
                                     <li class="subtwohober">
                                         <a class="active" href="index.php?pagina=signIn">
-                                            <span>Sign In</span>
+                                            <span>
+                                                <i class="fas fa-user-plus"></i>
+                                                <span class="mx-2">Sign up</span>
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="subtwohober">
                                         <a class="active" href="index.php?pagina=login">
-                                            <span>Login</span>
+                                            <span>
+                                                <i class="fa-solid fa-right-to-bracket"></i>
+                                                <span class="mx-2">Sign in</span>
+                                            </span>
                                         </a>
+
                                     </li>
                                     <li class="subtwohober">
                                         <a class="active" href="index.php?pagina=viewLogs">
-                                            <span>View Logs</span>
+                                            <span>
+                                                <i class="fa-solid fa-users"></i>
+                                                <span class="mx-2">
+                                                    View Logs
+                                                </span>
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="subtwohober">
-                                        <a class="active" href="index.php?pagina=exit">
-                                            <span class="exit-link">Exit<i class="fas fa-sign-out-alt"></i></span>
+                                        <a class="active" href="index.php?pagina=home">
+                                            <span class="exit-link">
+                                                <i class="fa-solid fa-right-from-bracket" style="color: #ea1a1a;"></i>
+                                                <span class="mx-2">
+                                                    Exit
+                                                </span>
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -93,7 +110,7 @@ session_start();
                                         <a href="index.php?pagina=signIn">
                                             <span>
                                                 <i class="fas fa-user-plus"></i>
-                                                <span class="mx-2">Sign In</span>
+                                                <span class="mx-2">Sign up</span>
                                             </span>
                                         </a>
                                     </li>
@@ -101,7 +118,7 @@ session_start();
                                         <a href="index.php?pagina=login">
                                             <span>
                                                 <i class="fa-solid fa-right-to-bracket"></i>
-                                                <span class="mx-2">Login</span>
+                                                <span class="mx-2">Sign in</span>
                                             </span>
                                         </a>
                                     </li>
@@ -116,7 +133,7 @@ session_start();
                                         </a>
                                     </li>
                                     <li class="subtwohober">
-                                        <a href="index.php?pagina=exit">
+                                        <a href="index.php?pagina=home">
                                             <span class="exit-link">
                                                 <i class="fa-solid fa-right-from-bracket" style="color: #ea1a1a;"></i>
                                                 <span class="mx-2">
@@ -285,7 +302,7 @@ session_start();
                             </li>
                         <?php endif ?>
 
-                    <?php else : ?>
+                        <?php else : ?>*/
                         <li>
                             <a href="#">Options <i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
@@ -305,7 +322,7 @@ session_start();
                                     </a>
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="index.php?pagina=exit">
+                                    <a href="index.php?pagina=home">
                                         <span class="exit-link">Exit<i class="fas fa-sign-out-alt"></i></span>
                                     </a>
                                 </li>
@@ -349,7 +366,7 @@ session_start();
                                     </a>
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="index.php?pagina=error">
+                                    <a href="index.php?pagina=404">
                                         <span>Error 404</span>
                                     </a>
                                 </li>
@@ -394,7 +411,7 @@ session_start();
             $_GET["pagina"] == "story" ||
             $_GET["pagina"] == "event" ||
             $_GET["pagina"] == "gallery" ||
-            $_GET["pagina"] == "error" ||
+            $_GET["pagina"] == "404" ||
             $_GET["pagina"] == "blog" ||
             $_GET["pagina"] == "blog-single" ||
             $_GET["pagina"] == "contact" ||
@@ -402,7 +419,7 @@ session_start();
         ) {
             include "paginas/" . $_GET["pagina"] . ".php";
         } else {
-            include "paginas/error.php";
+            include "paginas/404.php";
         }
     } else {
         include "paginas/home.php";
@@ -438,7 +455,6 @@ session_start();
                                 <a href="#0"><i class="fa-brands fa-instagram"></i></a>
                             </li>
                         </ul>
-
 
                         <ul class="footer__menu">
                             <?php if (isset($_GET["pagina"])) : ?>
@@ -540,8 +556,6 @@ session_start();
                                 </li>
                             <?php endif ?>
                         </ul>
-
-
                     </div>
                 </div>
             </div>

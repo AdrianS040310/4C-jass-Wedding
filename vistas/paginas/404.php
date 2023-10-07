@@ -1,28 +1,3 @@
-<!--==== Scroll-Up Section Here ======= -->
-<div class="scroll-up">
-    <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-</div>
-<!--==== Scroll-Up Section End ======= -->
-
-<?php
-
-if (!isset($_SESSION["validarIngreso"])) {
-    if ($_SESSION["validarIngreso"] != "ok") {
-        echo '<script> window.location = "index.php?pagina=login";</script>';
-        return;
-    } else {
-        echo '<script> windows.location = "index.php?pagina=home";</script>';
-        return;
-    }
-}
-
-$usuarios = ControladorFormularios::ctrSeleccionarRegistros(null, null);
-
-
-?>
-
 <!--=========== Breadcumd Section Here ========= -->
 <section class="breadcumd__banner">
     <div class="container">
