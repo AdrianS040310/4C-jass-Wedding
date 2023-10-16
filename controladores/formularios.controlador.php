@@ -23,6 +23,8 @@ class ControladorFormularios
 
                 $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
                 return $respuesta;
+            } else  {
+                
             }
         }
     }
