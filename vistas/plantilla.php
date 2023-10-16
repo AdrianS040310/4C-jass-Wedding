@@ -133,7 +133,7 @@ session_start();
                                         </a>
                                     </li>
                                     <li class="subtwohober">
-                                        <a href="index.php?pagina=home">
+                                        <a href="index.php?pagina=exit">
                                             <span class="exit-link">
                                                 <i class="fa-solid fa-right-from-bracket" style="color: #ea1a1a;"></i>
                                                 <span class="mx-2">
@@ -302,7 +302,7 @@ session_start();
                             </li>
                         <?php endif ?>
 
-                        <?php else : ?>*/
+                        <?php else : ?>
                         <li>
                             <a href="#">Options <i class="fas fa-chevron-down"></i></a>
                             <ul class="sub-menu">
@@ -322,7 +322,7 @@ session_start();
                                     </a>
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="index.php?pagina=home">
+                                    <a href="index.php?pagina=exit">
                                         <span class="exit-link">Exit<i class="fas fa-sign-out-alt"></i></span>
                                     </a>
                                 </li>
