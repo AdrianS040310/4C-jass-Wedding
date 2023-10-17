@@ -9,13 +9,15 @@ class ControladorFormularios
     {
         if (isset($_POST["registroNombre"])) {
             if (
-                preg_match("/^[azA-Z]+$/", $_POST["registroNombre"]) &&
-                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\-[a-z]{2,3})+$/', $_POST["registroEmail"]) &&
+                preg_match("/^[a-zA-Z ]+$/", $_POST["registroNombre"]) &&
+                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}+$/', $_POST["registroEmail"]) &&
                 preg_match('/^[0-9a-zA-Z]+$/', $_POST["registroPassword"])
             ) {
+                $token = md5($_POST["registroNombre"] . "+" . $_POST["registroEmail"]);
 
                 $tabla = "registeredusers";
                 $datos = array(
+                    "token" => $token,
                     "nombre" => $_POST["registroNombre"],
                     "email" => $_POST["registroEmail"],
                     "password" => $_POST["registroPassword"],
@@ -23,8 +25,9 @@ class ControladorFormularios
 
                 $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
                 return $respuesta;
-            } else  {
-                
+            } else {
+                $respuesta = "error";
+                return $respuesta;
             }
         }
     }
@@ -88,22 +91,40 @@ class ControladorFormularios
     static public function ctrActualizarRegistro()
     {
         if (isset($_POST["actualizarNombre"])) {
-            if ($_POST["actualizarPassword"] != "") {
-                $password = $_POST["actualizarPassword"];
+            if (
+                preg_match("/^[a-zA-Z ]+$/", $_POST["actualizarNombre"]) &&
+                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}+$/', $_POST["actualizarEmail"])
+            ) {
+                $usuario = ModeloFormularios::mdlSeleccionarRegistros("registeredusers", "token", $_POST["tokenUsuario"]);
+                $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
+
+                if ($compararToken == $_POST["tokenUsuario"]) {
+                    if ($_POST["actualizarPassword"] != "") {
+                        if (preg_match('/^[0-9a-zA-Z]+$/', $_POST["actualizarPassword"])) {
+                            $password = $_POST["actualizarPassword"];
+                        }
+                    } else {
+                        $password = $_POST["passwordActual"];
+                    }
+                    $tabla = "registeredusers";
+
+                    $datos = array(
+                        "token" => $_POST["tokenUsuario"],
+                        "nombre" => $_POST["actualizarNombre"],
+                        "email" => $_POST["actualizarEmail"],
+                        "password" => $password
+                    );
+
+                    $respuesta = ModeloFormularios::mdlActualizarRegistros($tabla, $datos);
+                    return $respuesta;
+                } else {
+                    $respuesta = "error";
+                    return $respuesta;
+                }
             } else {
-                $password = $_POST["passwordActual"];
+                $respuesta = "error";
+                return $respuesta;
             }
-            $tabla = "registeredusers";
-
-            $datos = array(
-                "id" => $_POST["idUsuario"],
-                "nombre" => $_POST["actualizarNombre"],
-                "email" => $_POST["actualizarEmail"],
-                "password" => $password
-            );
-
-            $respuesta = ModeloFormularios::mdlActualizarRegistros($tabla, $datos);
-            return $respuesta;
         }
     }
 
@@ -113,18 +134,24 @@ class ControladorFormularios
     static function ctrEliminarRegistro()
     {
         if (isset($_POST["eliminarRegistro"])) {
-            $tabla = "registeredusers";
-            $valor = $_POST["eliminarRegistro"];
+            $usuario = ModeloFormularios::mdlSeleccionarRegistros("registeredusers", "token", $_POST["eliminarRegistro"]);
 
-            $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+            $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
 
-            if ($respuesta = "ok") {
-                echo '<script> 
+            if ($compararToken == $_POST["eliminarRegistro"]) {
+                $tabla = "registeredusers";
+                $valor = $_POST["eliminarRegistro"];
+
+                $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+
+                if ($respuesta = "ok") {
+                    echo '<script> 
                 if(window.history.replaceState){
                     window.history.replaceState(null, null, window.location.href);
                 } 
                 window.location = "index.php?pagina=viewLogs";
                 </script>';
+                }
             }
         }
     }

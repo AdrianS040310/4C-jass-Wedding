@@ -68,12 +68,12 @@ $actualizar->ctrActualizarRegistro();
                                     <td> <?php echo $value["f"] ?> </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href=<?php echo 'index.php?pagina=edit&id=' . $value["id"]; ?>>
+                                            <a href=<?php echo 'index.php?pagina=edit&token=' . $value["token"]; ?>>
                                                 <button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button>
                                             </a>
                                         </div>
                                         <form method="post">
-                                            <input type="hidden" value="<?php echo $value["id"]; ?>" name="eliminarRegistro">
+                                            <input type="hidden" value="<?php echo $value["token"]; ?>" name="eliminarRegistro">
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                             <?php
                                             $eliminar = new ControladorFormularios();

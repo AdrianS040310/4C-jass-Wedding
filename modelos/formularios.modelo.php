@@ -7,9 +7,10 @@ class ModeloFormularios
 
     static public function mdlRegistro($tabla, $datos)
     {
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(`nombre`, `email`, `password`) 
-        VALUES (:nombre, :email, :password)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(`token`, `nombre`, `email`, `password`) 
+        VALUES (:token, :nombre, :email, :password)");
 
+        $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
@@ -51,12 +52,12 @@ class ModeloFormularios
     static public function mdlActualizarRegistros($tabla, $datos)
     {
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre= :nombre, email=:email, password=:password
-        WHERE id = :id");
+        WHERE token = :token");
 
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+        $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
 
 
         if ($stmt->execute()) {
@@ -74,9 +75,9 @@ class ModeloFormularios
 
     static public function mdlEliminarRegistro($tabla, $valor)
     {
-        $stmt = Conexion::conectar()->prepare("DELETE from $tabla WHERE id = :id");
+        $stmt = Conexion::conectar()->prepare("DELETE from $tabla WHERE token = :token");
 
-        $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
+        $stmt->bindParam(":token", $valor, PDO::PARAM_STR);
 
 
         if ($stmt->execute()) {
@@ -86,5 +87,8 @@ class ModeloFormularios
         }
 
         $stmt = null;
+        /**
+         * Hemos terminado el CRUD
+         */
     }
 }
