@@ -9,18 +9,20 @@ class ControladorFormularios
     {
         if (isset($_POST["registroNombre"])) {
             if (
-                preg_match("/^[a-zA-Z ]+$/", $_POST["registroNombre"]) &&
-                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}+$/', $_POST["registroEmail"]) &&
+                preg_match('/^[a-zA-ZáéíóúñÑ\s]+$/', $_POST["registroNombre"]) &&
+                preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $_POST["registroEmail"]) &&
                 preg_match('/^[0-9a-zA-Z]+$/', $_POST["registroPassword"])
             ) {
                 $token = md5($_POST["registroNombre"] . "+" . $_POST["registroEmail"]);
+
+                $encriptarPassword = crypt($_POST["registroPassword"], '$2a$07$wwwinnovara3dcomwebapp$');
 
                 $tabla = "registeredusers";
                 $datos = array(
                     "token" => $token,
                     "nombre" => $_POST["registroNombre"],
                     "email" => $_POST["registroEmail"],
-                    "password" => $_POST["registroPassword"],
+                    "password" => $encriptarPassword
                 );
 
                 $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
@@ -53,17 +55,30 @@ class ControladorFormularios
             $valor = $_POST["ingresoEmail"];
             $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
 
+            $encriptarPassword = crypt($_POST["ingresoPassword"], '$2a$07$wwwinnovara3dcomwebapp$');
+
             if (is_array($respuesta)) {
-                if ($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $_POST["ingresoPassword"]) {
+                if ($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $encriptarPassword) {
+                    ModeloFormularios::mdlActualizarIntentosFallidos($tabla, 0, $respuesta["token"]);
                     $_SESSION["validarIngreso"] = "ok";
-                    echo '<div class="alert alert-success">
-                    <label class="text-dark">ingreso exitoso!!!</label> </div>
-                    <script>
-                        setTimeout( function(){
-                                        window.location = "index.php?pagina=home";
-                                    }, 3000);
-                    </script>';
+                    echo '<script>
+                        if(window.history.replaceState){
+                            window.history.replaceState(null, null, window.location.href);
+                        }
+                        window.location="index.php?pagina=home";
+                        </script>';
                 } else {
+                    if ($respuesta["intentos_fallidos"] < 3) {
+                        $tabla = "registeredusers";
+                        $intentos_fallidos = $respuesta["intentos_fallidos"] + 1;
+                        $actualizarIntentoFallidos = ModeloFormularios::mdlActualizarIntentosFallidos(
+                            $tabla,
+                            $intentos_fallidos,
+                            $respuesta["token"]
+                        );
+                    } else {
+                        echo '<div class="alert alert-warning">RECAPTCHA! Debes validar que no eres un robot</div>';
+                    }
                     echo '<script>
                 if(window.history.replaceState){
                     window.history.replaceState(null, null, window.location.href);
@@ -92,8 +107,8 @@ class ControladorFormularios
     {
         if (isset($_POST["actualizarNombre"])) {
             if (
-                preg_match("/^[a-zA-Z ]+$/", $_POST["actualizarNombre"]) &&
-                preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}+$/', $_POST["actualizarEmail"])
+                preg_match('/^[a-zA-ZáéíóúñÑ\s]+$/', $_POST["actualizarNombre"]) &&
+                preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $_POST["actualizarEmail"])
             ) {
                 $usuario = ModeloFormularios::mdlSeleccionarRegistros("registeredusers", "token", $_POST["tokenUsuario"]);
                 $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
@@ -101,15 +116,23 @@ class ControladorFormularios
                 if ($compararToken == $_POST["tokenUsuario"]) {
                     if ($_POST["actualizarPassword"] != "") {
                         if (preg_match('/^[0-9a-zA-Z]+$/', $_POST["actualizarPassword"])) {
-                            $password = $_POST["actualizarPassword"];
+                            $password = crypt($_POST["actualizarPassword"], '$2a$07$wwwinnovara3dcomwebapp$');
                         }
                     } else {
                         $password = $_POST["passwordActual"];
                     }
+
+                    if ($_POST["nombreActual"] != $_POST["actualizarNombre"] || $_POST["emailActual"] != $_POST["actualizarEmail"]) {
+                        $nuevoToken = md5($_POST["actualizarNombre"] . "+" . $_POST["actualizarEmail"]);
+                    } else {
+                        $nuevoToken = null;
+                    }
+
                     $tabla = "registeredusers";
 
                     $datos = array(
                         "token" => $_POST["tokenUsuario"],
+                        "nuevoToken" => $nuevoToken,
                         "nombre" => $_POST["actualizarNombre"],
                         "email" => $_POST["actualizarEmail"],
                         "password" => $password

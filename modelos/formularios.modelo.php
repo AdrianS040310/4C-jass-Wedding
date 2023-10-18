@@ -51,14 +51,23 @@ class ModeloFormularios
      */
     static public function mdlActualizarRegistros($tabla, $datos)
     {
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre= :nombre, email=:email, password=:password
+        if ($datos["nuevoToken"] == null) {
+            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre= :nombre, email=:email, password=:password
         WHERE token = :token");
 
-        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
-        $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-        $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
-
+            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+            $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+            $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+            $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
+        } else {
+            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre= :nombre, email=:email, password=:password, token=:nuevoToken
+        WHERE token = :token");
+            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+            $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+            $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+            $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
+            $stmt->bindParam(":nuevoToken", $datos["nuevoToken"], PDO::PARAM_STR);
+        }
 
         if ($stmt->execute()) {
             return "ok";
@@ -90,5 +99,21 @@ class ModeloFormularios
         /**
          * Hemos terminado el CRUD
          */
+    }
+
+    static public function mdlActualizarIntentosFallidos($tabla, $valor, $token)
+    {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET intentos_fallidos = :intentos_fallidos 
+        WHERE token = :token");
+
+        $stmt->bindParam(":intentos_fallidos", $valor, PDO::PARAM_INT);
+        $stmt->bindParam(":token", $token, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            print_r(Conexion::conectar()->errorInfo());
+        }
+        $stmt = null;
     }
 }
